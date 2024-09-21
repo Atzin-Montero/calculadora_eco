@@ -1,5 +1,5 @@
 # Importar
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -15,8 +15,7 @@ def result_calculate(size, lights, device):
 @app.route('/')
 def index():
     return render_template('index.html')
-
-# La segunda página
+# Segunda página
 @app.route('/<size>')
 def lights(size):
     return render_template(
@@ -28,7 +27,7 @@ def lights(size):
 @app.route('/<size>/<lights>')
 def electronics(size, lights):
     return render_template(
-                            'electronics.html',
+                            'electronics.html',                           
                             size = size, 
                             lights = lights                           
                            )
@@ -42,4 +41,32 @@ def end(size, lights, device):
                                                     int(device)
                                                     )
                         )
+# El formulario
+@app.route('/form')
+def form():
+    return render_template('form.html')
+
+#Resultados del formulario
+@app.route('/submit', methods=['POST'])
+def submit_form():
+    # Declarar variables para la recogida de datos
+    name = request.form.get('name')
+    email = request.form.get('email')
+    address = request.form.get('address')
+    date = request.form.get('date')
+
+    with open('form.txt', 'a',) as f:
+        f.write("Tu nombre: "+ name + '\n')
+        f.write("Tu email: "+ email + '\n')
+        f.write("Tu direccion: "+ address + '\n')
+        f.write("Fecha: "+ date + '\n')
+
+    return render_template('form_result.html', 
+                           # Coloque aquí las variables
+                           name=name,
+                           email=email,
+                           address=address,
+                           date=date
+                           )
+
 app.run(debug=True)
