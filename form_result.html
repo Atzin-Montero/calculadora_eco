@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="widht=device-width", initial-scale="1.0">
+        <title>Resultados del formulario</title>
+    </head>
+    <body>
+        {% block content %}
+        <h1 style="color: blueviolet; font-family: Georgia, 'Times New Roman', Times, serif">Gracias por rellenar el formulario.</h1>
+        <p style="color: cadetblue;">Tu nombre: {{ name }}</p>
+        <p style="color: yellowgreen">Tu E-mail: {{ email }}</p>
+        <p style="color: rgb(241, 152, 43);">Tu direccion: {{ address }}</p>
+        <p style="color: darkblue;">Tu fecha: {{ date }}</p>
+        {% endblock %}
+    </body>
+</html>
